@@ -11,7 +11,19 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double  height  =  MediaQuery.of(context).size.height ;
     return Stack(
+      
       children: [
+        Align(
+          alignment: Alignment.topLeft,
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.blueAccent
+              ),
+              child: Icon(Icons.backspace_outlined,size: 35, color: Colors.amber,),
+            )
+        ),
         BackImageWidget(height: height, title: title),
         Align(
           alignment: Alignment.bottomCenter,

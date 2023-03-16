@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 var  primaryColor = Colors.deepPurple;
+var greenColors = Colors.green[900];
 var amberColor = Colors.amber;
 var  blackColor  =  Colors.black;
 var blackLightColor =  Color(0xff808080);

@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:torismo/style/style.dart';
 import 'package:google_fonts/google_fonts.dart';
+import "package:get/get.dart";
 import  'detail.dart';
+import  "../config/dataApi.dart";
+
 
 
 
@@ -25,14 +26,16 @@ class HomePage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white70,
         body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
               height: height * .35,
               child: ListView.builder(
+                  scrollDirection:Axis.horizontal ,
                   shrinkWrap: true,
                   itemCount: imageList.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -44,11 +47,37 @@ class HomePage extends StatelessWidget {
                             image: imageList[index]));
                   }),
             ),
-            TextWidget(),
+            TextWidget(title:"Vidéos Recent",),
             const SizedBox(
               height: 5,
             ),
-            GridWidget(imageList: imageList)
+            VideosWidget(),
+            SizedBox(height: 20,),
+            TextWidget(title:"Programmes de la semaines",),
+            const SizedBox(
+              height: 5,
+            ),
+            VideosWidget(),
+            SizedBox(height: 20,),
+            TextWidget(title:"Videos de listes",),
+            const SizedBox(
+              height: 5,
+            ),
+            VideosWidget(),
+            SizedBox(child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              height: 2,
+              color: Colors.grey[200],
+            ),),
+            SizedBox(
+              height: 20,
+            ),
+            SocialMediaWidget(),
+            SizedBox(
+              height: 100,
+            ),
+
+
           ],
         ),
       ),
@@ -59,95 +88,32 @@ class HomePage extends StatelessWidget {
 }
 
 
-class GridWidget extends StatelessWidget {
-  const GridWidget({
-    Key? key,
-    required this.imageList,
-  }) : super(key: key);
-
-  final List<String> imageList;
-
-  @override
-  Widget build(BuildContext context) {
-    String image = "vue_degagé_montage";
-
-    return GridView.count(
-      physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 20,
-      shrinkWrap: true,
-      children: List.generate(imageList.length, (index) {
-        return Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image:
-                    AssetImage("assets/${imageList[index]}.jpeg"),
-                    fit: BoxFit.cover),
-                borderRadius:
-                BorderRadius.circular(containerRoundCorner)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                ListTile(
-                  title: Text(
-                    image,
-                    style: GoogleFonts.poppins(
-                        color: whiteColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Icon(Icons.star, color: amberColor, size: 10),
-                      Icon(Icons.star, color: amberColor, size: 10),
-                      Icon(Icons.star, color: amberColor, size: 10),
-                      Icon(Icons.star, color: amberColor, size: 10),
-                      Icon(Icons.star, color: amberColor, size: 10),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "4.5",
-                        style: GoogleFonts.poppins(
-                            color: whiteColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                  trailing: CircleAvatar(
-                    radius: 10,
-                    backgroundColor: whiteColor,
-                    child: const Icon(Icons.favorite,
-                        color: Colors.red, size: 15),
-                  ),
-                )
-              ],
-            ));
-      }),
-    );
-  }
-}
-
 
 
 
 
 class TextWidget extends StatelessWidget {
-  const TextWidget({Key? key}) : super(key: key);
+  const TextWidget({
+    Key? key,
+    required this.title
+  }) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("Recomanded",
-            style:
-                GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
-        Text("View All", style: subTitleTextStyle()),
-      ],
+    return Container(
+
+      padding: EdgeInsets.symmetric(horizontal: 10 ,  vertical: 10),
+      color: Colors.green,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title.toString(),
+              style:
+              GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
+          Text("View All", style: subTitleTextStyle()),
+        ],
+      ),
     );
   }
 }
@@ -158,7 +124,8 @@ class ImageWidget extends StatelessWidget {
       required this.height,
       //required this.imageList,
       required this.width,
-      required this.image})
+      required this.image}
+      )
       : super(key: key);
 
   final double height;
@@ -169,14 +136,14 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
       child: Container(
-        height: height * .3,
-        width: width * .7,
+        height: height*.1,
+        width: width *.9,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/${image}.jpeg"), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(containerRoundCorner)),
+            borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -219,6 +186,136 @@ class ImageWidget extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+
+List category = [
+  {
+    "icon": "assets/chicago.jpeg",
+    "name": "titre de la vidéo 1",
+    "color": Colors.teal[200]
+  },
+
+  {
+    "icon": "assets/lac.jpeg",
+    "name": "titre de la vidéo 2",
+    "color": Colors.teal[200]
+  },
+  {
+    "icon": "assets/letsgo.jpeg",
+    "name": "titre de la vidéo 3",
+    "color": Colors.teal[200]
+  },
+  {
+    "icon": "assets/maison.jpeg",
+    "name": "titre de la vidéo 3",
+    "color": Colors.teal[200]
+  },
+  {
+    "icon": "assets/tobogan.jpeg",
+    "name": "titre de la vidéo 5",
+    "color": Colors.teal[200]
+  },
+];
+Widget VideosWidget() {
+  return Container(
+    height: 120,
+    margin: EdgeInsets.only(top: 8),
+    padding: EdgeInsets.only(top: 8),
+    child: ListView.builder(
+
+      scrollDirection: Axis.horizontal,
+      itemCount: category.length,
+      itemBuilder: (context, i) {
+        var item = category.elementAt(i);
+        return Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: GestureDetector(
+            onTap: (){
+              print("");
+            } ,
+            child: Column(
+              children: [
+                Container(
+                  height: 75,
+                  width: 75,
+                  decoration: BoxDecoration(
+                      color: item['color'],
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                          image: AssetImage(item['icon'].toString()),
+                          fit: BoxFit.cover
+                      )
+                  ),
+
+                ),
+                Text(item['name'].toString(),maxLines: 2,textAlign:TextAlign.start,)
+              ],
+            ),
+          )
+        );
+      },
+    ),
+  );
+}
+
+
+
+
+class SocialMediaWidget extends StatelessWidget {
+  const SocialMediaWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Text("Reseaux scociaux" ,style: GoogleFonts.nunito(fontSize: 20),),
+          ),
+          SizedBox(height: 20,),
+          Container(
+              margin: EdgeInsets.only(top: 20 , bottom: 10),
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child:
+              GridView.count(
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 20,
+                shrinkWrap: true,
+                children: List.generate(socialNetworkList.length, (index) {
+                  return GestureDetector(
+                    onTap: (){},
+                    child:
+                    Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image:
+                              AssetImage(socialNetworkList[index]["coverPicture"].toString()),
+                              fit: BoxFit.cover),
+                          borderRadius:
+                          BorderRadius.circular(containerRoundCorner)),
+
+                    ),
+                  );
+                }),
+              )
+
+
+          )
+        ],
       ),
     );
   }

@@ -44,6 +44,9 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   english_words: ^4.0.0
   flutter_awesome_buttons: ^1.1.0
+  carousel_slider: ^4.2.1
+  video_player: ^2.5.1
+  chewie: ^1.4.0
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +79,11 @@ flutter:
     - assets/vue_degagé_montage.jpeg
     - assets/chicago.jpeg
     - assets/parc.jpeg
+    - assets/icons/facebook.png
+    - assets/icons/youtube.png
+    - assets/icons/instagram.png
+    - assets/videos/video1.mp4
+    -
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import  "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:torismo/style/style.dart';
-import 'package:torismo/views/videolist.dart';
-
+import 'package:torismo/views/evennement/eventList.dart';
+import 'package:torismo/views/videos/videolist.dart';
+import 'package:torismo/views/bookmark/bookmarck.dart';
 import 'home.dart';
 
 
@@ -60,7 +61,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 ),
               )
             ],
-            bottom: TabBar(
+            /*bottom: TabBar(
               indicatorColor: primaryColor,
               indicatorSize: TabBarIndicatorSize.tab,
               labelColor: primaryColor,
@@ -89,16 +90,22 @@ class _NavigationPageState extends State<NavigationPage> {
                 ),
               ],
             ),
+
+             */
           ),
           body: PageView(
+            scrollDirection: Axis.vertical,
+            reverse: true,
+            allowImplicitScrolling: true,
+            scrollBehavior: ScrollBehavior(),
             controller: _pageController,
             onPageChanged: onPagechanged,
             physics: NeverScrollableScrollPhysics(),
             children: [
                HomePage(),
               VideoListPage(),
-              Center(child: Text("Featured" ,style:titlePrimaryTextStyle()),),
-              Center(child: Text("Most visited" ,style:titlePrimaryTextStyle()),),
+              EventListPage(),
+              BookmarkPage(),
               Center(child: Text("Europe" ,style:titlePrimaryTextStyle()),),
             ],
           ),
@@ -106,14 +113,20 @@ class _NavigationPageState extends State<NavigationPage> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const  EdgeInsets.symmetric(horizontal: 30,vertical: 20),
+            padding: const  EdgeInsets.symmetric(horizontal: 1,vertical: 1),
             child: Container(
               decoration: BoxDecoration(
                   color: whiteColor,
-                  borderRadius: BorderRadius.circular(containerRoundCorner)
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 1,
+                      offset: Offset(0,3)
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(1)
               ),
               child: Padding(
-                padding: const  EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+                padding: const  EdgeInsets.symmetric(horizontal: 5,vertical: 15),
                 child: CupertinoTabBar(
                   border: Border(
                       top:BorderSide(
@@ -123,7 +136,7 @@ class _NavigationPageState extends State<NavigationPage> {
                   backgroundColor: whiteColor,
                   currentIndex: pageIndex,
                   onTap: onTap,
-                  activeColor: primaryColor,
+                  activeColor: greenColors,
                   items: const [
                     BottomNavigationBarItem(icon: Icon(Icons.home_outlined)),
                     BottomNavigationBarItem(icon: Icon(Icons.play_circle)),
