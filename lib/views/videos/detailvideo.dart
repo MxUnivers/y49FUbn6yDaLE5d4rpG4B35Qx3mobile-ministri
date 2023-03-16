@@ -94,10 +94,11 @@ class _DetailVideoPageState extends State<DetailVideoPage> {
                           ],
                         ),
                       ),
+                      CommentListComponent(),
+                      MyTextField(),
                     ],
                   ),
                 ),
-                
               ],
             ),
           ],
@@ -121,11 +122,39 @@ class _CommentListComponentState extends State<CommentListComponent> {
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: 200,
-          color: Colors.blue,
+          height: 220,
+          color: Colors.grey[100],
+          child: ListView(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 7),
+                color: Colors.grey[100],
+                height: 30,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 100,
+                      child: CircleAvatar(
+                        child: Image.network(
+                            "https://cdn-icons-png.flaticon.com/512/61/61205.png"),
+                      ),
+                    ),
+                    Container(
+                      color: Colors.blueGrey,
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        "Commentaire 1",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
         Positioned(
-          top: 50,
+          bottom: 50,
           left: 50,
           child: Container(
             width: double.infinity,
@@ -138,3 +167,37 @@ class _CommentListComponentState extends State<CommentListComponent> {
   }
 }
 
+class MyTextField extends StatefulWidget {
+  @override
+  _MyTextFieldState createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends State<MyTextField> {
+  final myController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return
+          Container(
+            height: 60,
+            color: Colors.grey[200],
+            child: TextField(
+              style: TextStyle(color: Colors.grey[900]),
+              controller: myController,
+              decoration: InputDecoration(
+                labelText: 'Ingrese su nombre',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (text) {
+                print("Valor del TextField: $text");
+              },
+            ),
+          );
+  }
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
+}
