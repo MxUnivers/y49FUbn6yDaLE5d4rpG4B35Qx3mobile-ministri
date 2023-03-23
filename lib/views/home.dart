@@ -1,6 +1,38 @@
+import 'dart:convert';
 import "package:flutter/material.dart";
+import 'package:http/http.dart' as http;
 
-class HomePage extends StatelessWidget {
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+
+class _HomePageState extends State<HomePage> {
+  List<dynamic> _data = [];
+  List<dynamic> _dataList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataFromApi();
+  }
+  Future<void> _getDataFromApi() async {
+    final response =
+    await http.get(Uri.parse('https://tasty-dog-trousers.cyclic.app/api/v1/temoignages/get/all'));
+    if (response.statusCode == 200 || response.statusCode == 300) {
+      setState(() {
+        Map<String, dynamic> _data = jsonDecode(response.body);
+        _dataList = _data["data"];
+        print(_dataList);
+      });
+    } else {
+      throw Exception('Failed to load data from API');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,24 +41,29 @@ class HomePage extends StatelessWidget {
       child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
-            children: [
-              buildCard("titre  mon article",
-                  "description l'article en question, je suis trsè content pour vous , votre artcile est très dans la plus part des "),
-              buildCard("titre  mon article",
-                  "description l'article en question, je suis trsè content pour vous , votre artcile est très dans la plus part des "),
-              buildCard("titre  mon article",
-                  "description l'article en question, je suis trsè content pour vous , votre artcile est très dans la plus part des "),
-              buildCard("titre  mon article",
-                  "description l'article en question, je suis trsè content pour vous , votre artcile est très dans la plus part des "),
-              buildCard("titre  mon article",
-                  "description l'article en question, je suis trsè content pour vous , votre artcile est très dans la plus part des "),
-            ],
+            children: _dataList
+              .map((data) =>
+              buildCard(
+                data["title"].toString(),
+                data["description"].toString(),
+                data['coverPicture'].toString()
+              )
+            )
+            .toList(),
+    ),
           )),
-    ));
+    );
   }
 }
+/*
+* buildCard(
+                  "titre  mon article",
+                  "description l'article en question, je suis trsè "
+                      "content pour vous , votre artcile est très dans "
+                      "la plus part des ")
+* */
 
-Card buildCard(String title, String description) {
+Card buildCard(String title, String description, String coverPicture) {
   var heading = title;
   var subheading = '2 bed, 1 bath, 1300 sqft';
   var cardImage =
@@ -51,7 +88,7 @@ Card buildCard(String title, String description) {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Image.network(
-                'https://source.unsplash.com/random/800x600?house',
+                coverPicture,
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) {
@@ -87,6 +124,5 @@ Card buildCard(String title, String description) {
             ],
           )
         ],
-      )
-  );
+      ));
 }
