@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   }
   Future<void> _getDataFromApi() async {
     final response =
-    await http.get(Uri.parse('https://tasty-dog-trousers.cyclic.app/api/v1/temoignages/get/all'));
+    await http.get(Uri.parse('https://tasty-dog-trousers.cyclic.app/api/v1/activites/school/get/all'));
     if (response.statusCode == 200 || response.statusCode == 300) {
       setState(() {
         Map<String, dynamic> _data = jsonDecode(response.body);
