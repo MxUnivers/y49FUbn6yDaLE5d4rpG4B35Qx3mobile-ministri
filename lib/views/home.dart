@@ -1,56 +1,54 @@
 import 'dart:convert';
+import 'dart:ui';
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
-
+import "package:google_fonts/google_fonts.dart";
+import '../config/baseUrl.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-
 class _HomePageState extends State<HomePage> {
   List<dynamic> _data = [];
   List<dynamic> _dataList = [];
+
 
   @override
   void initState() {
     super.initState();
     _getDataFromApi();
   }
+
   Future<void> _getDataFromApi() async {
-    final response =
-    await http.get(Uri.parse('https://tasty-dog-trousers.cyclic.app/api/v1/activites/school/get/all'));
+    final response = await http.get(Uri.parse(
+         baseUrl['url'].toString() +'/api/v1/activites/school/get/all'));
     if (response.statusCode == 200 || response.statusCode == 300) {
       setState(() {
         Map<String, dynamic> _data = jsonDecode(response.body);
-        _dataList = _data["data"];
-        print(_dataList);
+        return _dataList = _data["data"];
       });
     } else {
       throw Exception('Failed to load data from API');
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: _dataList
-              .map((data) =>
-              buildCard(
-                data["title"].toString(),
-                data["description"].toString(),
-                data['coverPicture'].toString()
-              )
-            )
-            .toList(),
-    ),
+      body: Container(
+          padding: EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: _dataList
+                  .map((data) => buildCard(
+                      data["title"].toString(),
+                      data["description"].toString(),
+                      data['coverPicture'].toString()))
+                  .toList(),
+            ),
           )),
     );
   }
@@ -70,14 +68,20 @@ Card buildCard(String title, String description, String coverPicture) {
       NetworkImage('https://source.unsplash.com/random/800x600?house');
   var supportingText = description;
   return Card(
-      color: Colors.white70,
+      color: Colors.white,
       elevation: 4.0,
       child: Column(
         children: [
           ListTile(
-            title: Text(heading),
+            title: Text(heading,
+                style: GoogleFonts.nunito(
+                  fontWeight: FontWeight.w900,
+                )),
             subtitle: Text(subheading),
-            trailing: Icon(Icons.favorite_outline),
+            trailing: IconButton(
+              icon: Icon(Icons.favorite_outline),
+              onPressed: () {},
+            ),
           ),
           Container(
             height: 200.0,
@@ -114,11 +118,14 @@ Card buildCard(String title, String description, String coverPicture) {
           ButtonBar(
             children: [
               TextButton(
-                child: const Text('CONTACT AGENT'),
-                onPressed: () {/* ... */},
-              ),
-              TextButton(
-                child: const Text('LEARN MORE'),
+                  child: Text('voire',
+                      style: GoogleFonts.nunito(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
+                  onPressed: () {/* ... */}),
+              ElevatedButton(
+                child: Text('reqarder plus tard',
+                    style: GoogleFonts.nunito(
+                        fontWeight: FontWeight.w700, fontSize: 15)),
                 onPressed: () {/* ... */},
               )
             ],
