@@ -51,7 +51,7 @@ class _NavigationPageState extends State<NavigationPage> {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             leading: Icon(Icons.menu_rounded ,  color : blackColor),
-            title: Text("Striker" ,  style: LargeBlackTitleTextStyle(),),
+            title: Text("app-ministry" ,  style: GoogleFonts.nunito(fontSize: 20,fontWeight: FontWeight.w700, color: Colors.blueGrey[700])),
             centerTitle: true,
             actions: [
               Padding(padding: const  EdgeInsets.all(8),
