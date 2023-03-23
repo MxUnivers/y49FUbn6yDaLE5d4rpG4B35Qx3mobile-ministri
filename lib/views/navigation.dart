@@ -51,7 +51,7 @@ class _NavigationPageState extends State<NavigationPage> {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             leading: Icon(Icons.menu_rounded ,  color : blackColor),
-            title: Text("Discovery" ,  style: LargeBlackTitleTextStyle(),),
+            title: Text("Striker" ,  style: LargeBlackTitleTextStyle(),),
             centerTitle: true,
             actions: [
               Padding(padding: const  EdgeInsets.all(8),
