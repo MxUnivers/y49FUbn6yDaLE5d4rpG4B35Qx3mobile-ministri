@@ -1,42 +1,57 @@
 import "package:flutter/material.dart";
+import 'package:torismo/component/IndicatorLoader.dart';
 import 'package:torismo/style/style.dart';
 import 'package:torismo/views/videos/detailvideo.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import '../detail.dart';
+import 'dart:convert';
+import 'package:card_loading/card_loading.dart';
+import 'dart:ui';
+import 'package:http/http.dart' as http;
+import '../../config/baseUrl.dart';
 
-
-class VideoListPage extends StatelessWidget {
-  const VideoListPage({Key? key}) : super(key: key);
+class VideoListPage extends StatefulWidget {
+  @override
+  _VideoListPageState createState() => _VideoListPageState();
+}
+class _VideoListPageState extends State<VideoListPage> {
 
 
   @override
   Widget build(BuildContext context) {
-    List<String> imageList = [
-      "letsgo",
-      "chicago",
-      "maison",
-      "parc",
-      "tobogan",
-      "letsgo",
-      "chicago",
-      "maison",
-      "parc",
-      "tobogan",
-      "vue_degagé_montage"
-    ];
-    String image = "vue_degagé_montage";
 
+    List<dynamic> _data = [];
+    List<dynamic> imageList = [];
+
+    Future<void> _getDataFromApi() async {
+      final response = await http.get(Uri.parse(
+          baseUrl['url'].toString()+"/api/v1/temoignages/get/all"));
+      if (response.statusCode == 200 || response.statusCode == 300) {
+        setState(() {
+          Map<String, dynamic> _data = jsonDecode(response.body);
+          print(imageList);
+          imageList = _data["data"];
+        });
+      } else {
+        print("errur lors du chargement ..");
+        throw Exception('Failed to load data from API');
+      }
+    }
+    @override
+    void initState() {
+      super.initState();
+      _getDataFromApi();
+    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
+
           child: Column(
             children: [
-
               SerchVideoWidget(),
               const SizedBox(
                 height: 25,
@@ -45,79 +60,87 @@ class VideoListPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  if (imageList.length == 0) {
-                    Center(
-                      child: Text("Aucn element trouvés"),
-                    );
-                    /*
-                    if(imageList.length == 0){
-                    Container(
-                      child: Text("Aucn element trouvés" , style: GoogleFonts.poppins(
-                        fontSize: 20
-                      ),
-                     ),
-                     );
-                     }
-                     */
-                  }
-                  return Card(
-
-                    margin: EdgeInsets.only(top: 10,bottom: 10),
-                    child: ListTile(
-                      onTap: ()=>Get.to(DetailVideoPage()),
-                      leading: Container(
-                        width: 100,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/${imageList[index]}.jpeg",
-                                ),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(5)),
-                      ),
-                      title: Text(imageList[index]),
-                      subtitle: Text(
-                        'A sufficiently long subtitle warrants three lines.',
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      trailing: IconButton(
-                          style: ButtonStyle(),
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.play_circle_fill,
-                            color: Colors.green[700],
-                          )),
-                      isThreeLine: true,
-                    ),
-                  );
-                },
-                itemCount: imageList.length,
-              )
+         SingleChildScrollView(
+           child:Column(children: [
+                imageList.length > 0 ?
+                Container(
+                  child: Column(
+                    children: imageList
+                        .map((data) =>   buildCardTemoignage(
+                        data["title"].toString(),
+                        data["description"].toString(),
+                        data["coverPicture"].toString()
+                    )).toList(),
+                  ),
+                )
+                    : Container(
+                  child: Center(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: CardLoading(
+                              height: 100,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              margin: EdgeInsets.only(bottom: 10),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: CardLoading(
+                              height: 100,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              margin: EdgeInsets.only(bottom: 10),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: CardLoading(
+                              height: 100,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              margin: EdgeInsets.only(bottom: 10),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: CardLoading(
+                              height: 100,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              margin: EdgeInsets.only(bottom: 10),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: CardLoading(
+                              height: 100,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              margin: EdgeInsets.only(bottom: 10),
+                            ),
+                          )
+                        ],
+                      )
+                  ),
+                ),
+              ])
+         )
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
+
+
 class TextWidget extends StatelessWidget {
   const TextWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Toutes les vidéos",
-            style:
-                GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
+        Text("Tous les temoignages",
+            style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
       ],
     );
   }
@@ -125,7 +148,6 @@ class TextWidget extends StatelessWidget {
 
 class SerchVideoWidget extends StatelessWidget {
   const SerchVideoWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -151,4 +173,40 @@ class SerchVideoWidget extends StatelessWidget {
           ),
         ));
   }
+}
+
+
+Card buildCardTemoignage(String title ,String description ,String coverPicture){
+  return Card(
+    margin: EdgeInsets.only(top: 10,bottom: 10),
+    child: ListTile(
+      onTap: (){
+      },
+      leading: Container(
+        width: 100,
+        height: double.infinity,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                  coverPicture.toString(),
+                ),
+                fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(5)),
+      ),
+      title: Text(title.toString()),
+      subtitle: Text(
+        description.toString(),
+        maxLines: 2,
+        style: TextStyle(fontSize: 12),
+      ),
+      trailing: IconButton(
+          style: ButtonStyle(),
+          onPressed: () {},
+          icon: Icon(
+            Icons.play_circle_fill,
+            color: Colors.green[700],
+          )),
+      isThreeLine: true,
+    ),
+  );
 }

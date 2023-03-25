@@ -3,20 +3,30 @@ import "package:video_player/video_player.dart";
 import "package:chewie/chewie.dart";
 
 class DetailVideoPage extends StatefulWidget {
-  const DetailVideoPage({Key? key}) : super(key: key);
+  final  String title;
+  final String description;
+  final String videoLink;
+  const DetailVideoPage({Key? key , required this.title , required this.description, required this.videoLink}) : super(key: key);
 
   @override
   State<DetailVideoPage> createState() => _DetailVideoPageState();
 }
 
 class _DetailVideoPageState extends State<DetailVideoPage> {
+
+
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
+  late String titre;
+  late  String description ;
+
   @override
   void initState() {
     super.initState();
+    String titre= widget.title;
+    String description= widget.title;
     _videoPlayerController = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4');
+        widget.videoLink.toString());
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       autoPlay: true,
@@ -70,11 +80,11 @@ class _DetailVideoPageState extends State<DetailVideoPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            const ListTile(
+                             ListTile(
                               leading: Icon(Icons.add_circle),
-                              title: Text('The Enchanted Nightingale'),
+                              title: Text("${widget.title.toString()}"),
                               subtitle: Text(
-                                  'Music by Julie Gable. Lyrics by Sidney Stein.'),
+                                  "${widget.description.toString()}"),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
