@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:ui';
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
-import "package:google_fonts/google_fonts.dart";
-import 'package:torismo/views/videos/detailvideo.dart';
-import '../config/baseUrl.dart';
+import 'package:torismo/views/home/detailvideo.dart';
+import '../../config/baseUrl.dart';
 import 'package:get/get.dart';
 import "package:card_loading/card_loading.dart";
+import "package:google_fonts/google_fonts.dart";
 
 
 class HomePage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _getDataFromApi() async {
     final response = await http.get(Uri.parse(
-        baseUrl['url'].toString() + '/api/v1/temoignages/get/all'));
+        baseUrl['url'].toString() + '/api/v1/activites/school/get/all'));
     if (response.statusCode == 200 || response.statusCode == 300) {
       setState(() {
         Map<String, dynamic> _data = jsonDecode(response.body);
@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
         body: Container(
             padding: EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -118,37 +119,60 @@ class _HomePageState extends State<HomePage> {
                       "la plus part des ")
 * */
 
-Card buildCard(String title, String description, String coverPicture , String videoLink) {
+Container buildCard(String title, String description, String coverPicture , String videoLink) {
   var heading = title;
   var subheading = '2 bed, 1 bath, 1300 sqft';
   var cardImage =
       NetworkImage('${coverPicture}');
   var supportingText = description;
-  return Card(
-      color: Colors.white,
-      elevation: 4.0,
-      child: Column(
-        children: [
-          ListTile(
-            title: Text(heading,
-                style: GoogleFonts.nunito(
-                  fontWeight: FontWeight.w900,
-                )),
-            subtitle: Text(subheading),
-            trailing: IconButton(
-              icon: Icon(Icons.favorite_outline),
-              onPressed: () {},
-            ),
+  return Container(
+    decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 2,
+            offset: Offset(0, 5),
           ),
-          Container(
-            height: 200.0,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Image.network(
+        ]
+    ),
+    margin: EdgeInsets.only(top: 10,bottom: 10),
+    child: ListTile(
+
+      onTap: (){
+        Get.to(DetailVideoPage(title: title.toString(), description: description.toString(), videoLink: videoLink.toString()));
+      },
+      leading: Container(
+        width: 100,
+        height: double.infinity,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(
+                  coverPicture.toString(),
+                ),
+                fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(5)),
+      ),
+      title: Text(title.toString(), style:GoogleFonts.nunito(color:Colors.grey), maxLines: 2),
+      subtitle: Text(
+        description.toString(),
+        maxLines: 1,
+        style: GoogleFonts.nunito(color: Colors.grey[100]),
+      ),
+      trailing: IconButton(
+          style: ButtonStyle(),
+          onPressed: () {
+            ()=>Get.to(DetailVideoPage(title: title.toString(), description: description.toString(), videoLink: videoLink.toString()));
+          },
+          icon: Icon(
+            Icons.play_circle_fill,
+            color: Colors.green[700],
+          )),
+      isThreeLine: true,
+    ),
+  );
+}
+
+/*
+Image.network(
                 coverPicture,
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
@@ -164,34 +188,5 @@ Card buildCard(String title, String description, String coverPicture , String vi
                     ),
                   );
                 },
-              ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            alignment: Alignment.centerLeft,
-            child: Text(supportingText),
-          ),
-          ButtonBar(
-            children: [
-              TextButton(
-                  child: Text('voire',
-                      style: GoogleFonts.nunito(
-                          fontWeight: FontWeight.bold, fontSize: 20)),
-                  onPressed: () {
-                     Get.to(
-                        DetailVideoPage(title: title.toString(), description: description.toString(), videoLink: videoLink.toString())
-                    );
-                  }
-                  ),
-              ElevatedButton(
-                child: Text('reqarder plus tard',
-                    style: GoogleFonts.nunito(
-                        fontWeight: FontWeight.w700, fontSize: 15)),
-                onPressed: () {/* ... */},
               )
-            ],
-          )
-        ],
-      ));
-}
+ */

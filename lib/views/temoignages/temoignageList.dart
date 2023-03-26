@@ -1,10 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:torismo/component/IndicatorLoader.dart';
 import 'package:torismo/style/style.dart';
-import 'package:torismo/views/videos/detailvideo.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
-import '../detail.dart';
 import 'dart:convert';
 import 'package:card_loading/card_loading.dart';
 import 'dart:ui';
@@ -19,30 +15,32 @@ class _VideoListPageState extends State<VideoListPage> {
 
 
   @override
+  void initState() {
+    super.initState();
+    _getDataFromApi();
+  }
+
+  List<dynamic> _data = [];
+  List<dynamic> imageList = [];
+
+  Future<void> _getDataFromApi() async {
+    final response = await http.get(Uri.parse(
+        baseUrl['url'].toString()+"/api/v1/temoignages/get/all"));
+    if (response.statusCode == 200 || response.statusCode == 300) {
+      setState(() {
+        Map<String, dynamic> _data = jsonDecode(response.body);
+        print(imageList);
+        imageList = _data["data"];
+      });
+    } else {
+      print("erreur lors du chargement ..");
+      throw Exception('Failed to load data from API');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
 
-    List<dynamic> _data = [];
-    List<dynamic> imageList = [];
-
-    Future<void> _getDataFromApi() async {
-      final response = await http.get(Uri.parse(
-          baseUrl['url'].toString()+"/api/v1/temoignages/get/all"));
-      if (response.statusCode == 200 || response.statusCode == 300) {
-        setState(() {
-          Map<String, dynamic> _data = jsonDecode(response.body);
-          print(imageList);
-          imageList = _data["data"];
-        });
-      } else {
-        print("errur lors du chargement ..");
-        throw Exception('Failed to load data from API');
-      }
-    }
-    @override
-    void initState() {
-      super.initState();
-      _getDataFromApi();
-    }
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -176,8 +174,17 @@ class SerchVideoWidget extends StatelessWidget {
 }
 
 
-Card buildCardTemoignage(String title ,String description ,String coverPicture){
-  return Card(
+Container buildCardTemoignage(String title ,String description ,String coverPicture){
+  return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 1,
+              offset: Offset(0, 2),
+            ),
+          ]
+      ),
     margin: EdgeInsets.only(top: 10,bottom: 10),
     child: ListTile(
       onTap: (){
@@ -203,7 +210,7 @@ Card buildCardTemoignage(String title ,String description ,String coverPicture){
           style: ButtonStyle(),
           onPressed: () {},
           icon: Icon(
-            Icons.play_circle_fill,
+            Icons.group,
             color: Colors.green[700],
           )),
       isThreeLine: true,

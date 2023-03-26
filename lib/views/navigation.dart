@@ -3,9 +3,9 @@ import  "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:torismo/style/style.dart';
 import 'package:torismo/views/evennement/eventList.dart';
-import 'package:torismo/views/videos/videolist.dart';
+import 'package:torismo/views/temoignages/temoignageList.dart';
 import 'package:torismo/views/bookmark/bookmarck.dart';
-import 'home.dart';
+import 'home/home.dart';
 
 
 class NavigationPage extends StatefulWidget {
@@ -139,7 +139,7 @@ class _NavigationPageState extends State<NavigationPage> {
                   activeColor: greenColors,
                   items: const [
                     BottomNavigationBarItem(icon: Icon(Icons.home_outlined)),
-                    BottomNavigationBarItem(icon: Icon(Icons.play_circle)),
+                    BottomNavigationBarItem(icon: Icon(Icons.group)),
                     BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined)),
                     BottomNavigationBarItem(icon: Icon(Icons.bookmark_outline)),
                     BottomNavigationBarItem(icon: Icon(Icons.person_outline)),

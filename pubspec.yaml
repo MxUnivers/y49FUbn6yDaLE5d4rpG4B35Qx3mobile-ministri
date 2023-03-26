@@ -48,6 +48,7 @@ dependencies:
   video_player: ^2.5.1
   chewie: ^1.4.0
   card_loading: ^0.3.0
+  animated_card: ^2.0.0
 
 dev_dependencies:
   flutter_test:
