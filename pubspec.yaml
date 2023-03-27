@@ -44,11 +44,11 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   english_words: ^4.0.0
   flutter_awesome_buttons: ^1.1.0
-  carousel_slider: ^4.2.1
   video_player: ^2.5.1
   chewie: ^1.4.0
   card_loading: ^0.3.0
   animated_card: ^2.0.0
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:

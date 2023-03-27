@@ -5,7 +5,11 @@ import 'dart:convert';
 import 'package:card_loading/card_loading.dart';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
+import 'package:torismo/views/home/detailvideo.dart';
 import '../../config/baseUrl.dart';
+import "package:carousel_slider/carousel_slider.dart";
+
+List<dynamic> _eventList = [];
 
 class EventListPage extends StatefulWidget {
   @override
@@ -20,16 +24,15 @@ class _EventListPageState extends State<EventListPage> {
   }
 
   List<dynamic> _data = [];
-  List<dynamic> eventList = [];
 
   Future<void> _getDataFromApi() async {
     final response = await http.get(Uri.parse(
-        baseUrl['url'].toString() + "/api/v1/activites/events/get/all"));
+        baseUrl['url'].toString() + "/api/v1/activites/event/get/all"));
     if (response.statusCode == 200 || response.statusCode == 300) {
       setState(() {
         Map<String, dynamic> _data = jsonDecode(response.body);
-        print(eventList);
-        eventList = _data["data"];
+        print(_eventList);
+        _eventList = _data["data"];
       });
     } else {
       print("erreur lors du chargement ..");
@@ -37,6 +40,8 @@ class _EventListPageState extends State<EventListPage> {
     }
   }
 
+  int _current = 0;
+  dynamic _selectedEvent = {};
   @override
   Widget build(BuildContext context) {
     String image = "vue_degagé_montage";
@@ -45,182 +50,133 @@ class _EventListPageState extends State<EventListPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.grey[100],
+      floatingActionButton: _selectedEvent.length > 0
+          ? FloatingActionButton(
+              onPressed: () {},
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 100,
+              ),
+            )
+          : null,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextWidget(),
-              const SizedBox(
-                height: 5,
-              ),
-              SizedBox(
-                  height: height * .35,
-                  child: GestureDetector(
-                      onTap: () {},
-                      child: EventListFirtWidget(
-                          height: height, width: width, image: eventList))),
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return cardEvent("", "", "");
-                  })
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text("Evenement dela liste",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.bold, fontSize: 20)),
-              SizedBox(
-                height: 10,
-              ),
-              Text("Suivez les venement du jour",
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.bold, fontSize: 12)),
-            ],
-          ),
-        ),
-        Spacer(),
-
-      ],
-    );
-  }
-}
-
-class EventListFirtWidget extends StatelessWidget {
-  const EventListFirtWidget(
-      {Key? key,
-      required this.height,
-      //required this.imageList,
-      required this.width,
-      required this.image})
-      : super(key: key);
-
-  final double height;
-  // final List<String> imageList;
-  final double width;
-  final List<dynamic> image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-      child: Container(
-        height: height * .3,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(image[0]["coverPicture"].toString()), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(containerRoundCorner)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+            child: Column(
           children: [
-            ListTile(
-                onTap: () {},
-                title: Text(
-                  image[0]["title"].toString(),
-                  style: GoogleFonts.poppins(
-                      color: whiteColor,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600),
-                ),
-                subtitle: Row(
-                  children: [
-                    Icon(Icons.star, color: amberColor, size: 15),
-                    Icon(Icons.star, color: amberColor, size: 15),
-                    Icon(Icons.star, color: amberColor, size: 15),
-                    Icon(Icons.star, color: amberColor, size: 15),
-                    Icon(Icons.star, color: amberColor, size: 15),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "4.5",
-                      style: GoogleFonts.poppins(
-                          color: whiteColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-                trailing: Container(
-                  width: 90,
-                  child: MaterialButton(
-                    color: Colors.white,
-                    elevation: 1,
-                    onPressed: () {},
-                    child: Container(
-                      width: 100,
-                      child: Row(
-                        children: [
-                          Text("Voire"),
-                          SizedBox(
-                            width: 5,
+            CarouselSlider(
+                options: CarouselOptions(
+                    height: 500,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.70,
+                    enlargeCenterPage: true),
+                items: _eventList.map((data) {
+                  return Builder(builder: (context) {
+                    return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (_selectedEvent == data) {
+                              _selectedEvent = {};
+                            } else {
+                              _selectedEvent = data;
+                            }
+                          });
+                        },
+                        child: AnimatedContainer(
+                          width: double.infinity,
+                          duration: Duration(milliseconds: 200),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              border: _selectedEvent == data
+                                  ? Border.all(
+                                      color: Colors.green.shade500, width: 3)
+                                  : null,
+                              boxShadow: _selectedEvent == data
+                                  ? [
+                                      BoxShadow(
+                                          color: Colors.green.shade100,
+                                          blurRadius: 30,
+                                          offset: Offset(0, 10))
+                                    ]
+                                  : [
+                                      BoxShadow(
+                                          color: Colors.grey.withOpacity(0.2),
+                                          offset: Offset(0, 5))
+                                    ]),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Container(
+                                    height: 350,
+                                    clipBehavior: Clip.hardEdge,
+                                    margin: EdgeInsets.only(top: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Image.network(
+                                        data["coverPicture"].toString(),
+                                        fit: BoxFit.cover)),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(data["title"].toString(),
+                                    style: GoogleFonts.nunito(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(data["description"].toString() + "...",
+                                    maxLines: 3,
+                                    style: GoogleFonts.nunito(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade600)),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child:
+                                  ElevatedButton(
+                                      style: ButtonStyle(
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.symmetric(
+                                                  horizontal: 20)),
+                                          backgroundColor:
+                                          MaterialStateProperty.all(
+                                              primaryColor),
+                                          shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      containerRoundCorner)))),
+                                      onPressed: () {
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children:  [
+                                          Text("aller vers ",
+                                            style:GoogleFonts.nunito(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700
+                                            )
+                                          ),
+                                          Icon(Icons.arrow_forward)
+                                        ],
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
-                          Icon(Icons.remove_red_eye_sharp,
-                              color: Colors.red, size: 20),
-                        ],
-                      ),
-                    ),
-                  ),
-                )),
+                        ));
+                  });
+                }).toList()),
           ],
-        ),
+        )),
       ),
     );
   }
-}
-
-Container cardEvent(String title, String description, String coverPicture) {
-  return Container(
-    child: ListTile(
-      onTap: () {},
-      leading: Container(
-        width: 100,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(
-                  coverPicture.toString(),
-                ),
-                fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(5)),
-      ),
-      title: Text(title.toString()),
-      subtitle: Text(
-        description.toString(),
-        maxLines: 2,
-        style: TextStyle(fontSize: 12),
-      ),
-      trailing: IconButton(
-          style: ButtonStyle(),
-          onPressed: () {},
-          icon: Icon(
-            Icons.calendar_month_outlined,
-            size: 25,
-            color: Colors.deepPurple,
-          )),
-      isThreeLine: true,
-    ),
-  );
 }
