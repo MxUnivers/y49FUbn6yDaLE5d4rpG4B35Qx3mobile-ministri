@@ -3,6 +3,7 @@ import  "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:torismo/style/style.dart';
 import 'package:torismo/views/evennement/eventList.dart';
+import 'package:torismo/views/profile/profilePage.dart';
 import 'package:torismo/views/temoignages/temoignageList.dart';
 import 'package:torismo/views/bookmark/bookmarck.dart';
 import 'home/home.dart';
@@ -51,7 +52,7 @@ class _NavigationPageState extends State<NavigationPage> {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             leading: Icon(Icons.menu_rounded ,  color : blackColor),
-            title: Text("app-ministry" ,  style: GoogleFonts.nunito(fontSize: 20,fontWeight: FontWeight.w700, color: Colors.blueGrey[700])),
+            title: Text("app-mobile-ministry" ,  style: GoogleFonts.nunito(fontSize: 20,fontWeight: FontWeight.w700, color: Colors.blueGrey[700])),
             centerTitle: true,
             actions: [
               Padding(padding: const  EdgeInsets.all(8),
@@ -106,7 +107,7 @@ class _NavigationPageState extends State<NavigationPage> {
               VideoListPage(),
               EventListPage(),
               BookmarkPage(),
-              Center(child: Text("Europe" ,style:titlePrimaryTextStyle()),),
+              ProfilePage()
             ],
           ),
         ),
@@ -126,7 +127,7 @@ class _NavigationPageState extends State<NavigationPage> {
                   borderRadius: BorderRadius.circular(1)
               ),
               child: Padding(
-                padding: const  EdgeInsets.symmetric(horizontal: 5,vertical: 15),
+                padding: const  EdgeInsets.symmetric(horizontal: 5,vertical: 8),
                 child: CupertinoTabBar(
                   border: Border(
                       top:BorderSide(
