@@ -85,7 +85,10 @@ flutter:
     - assets/icons/youtube.png
     - assets/icons/instagram.png
     - assets/videos/video1.mp4
-    -
+    - assets/icons/bookmarks/calendrier.png
+    - assets/icons/bookmarks/examen.png
+    - assets/icons/bookmarks/un-evenement.png
+    - assets/icons/bookmarks/video.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey[100],
         body: Container(
             padding: EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -147,6 +147,7 @@ Container buildCard(String title, String description, String coverPicture , Stri
             image: DecorationImage(
                 image: NetworkImage(
                   coverPicture.toString(),
+
                 ),
                 fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(5)),

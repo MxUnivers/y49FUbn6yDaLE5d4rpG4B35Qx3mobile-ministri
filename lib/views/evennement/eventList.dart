@@ -67,7 +67,7 @@ class _EventListPageState extends State<EventListPage> {
           children: [
             CarouselSlider(
                 options: CarouselOptions(
-                    height: 500,
+                    height: 490,
                     aspectRatio: 16 / 9,
                     viewportFraction: 0.70,
                     enlargeCenterPage: true),
@@ -109,7 +109,7 @@ class _EventListPageState extends State<EventListPage> {
                             child: Column(
                               children: [
                                 Container(
-                                    height: 350,
+                                    height: 320,
                                     clipBehavior: Clip.hardEdge,
                                     margin: EdgeInsets.only(top: 10),
                                     decoration: BoxDecoration(
@@ -121,12 +121,12 @@ class _EventListPageState extends State<EventListPage> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(data["title"].toString(),
+                                Text(data["title"].toString(),maxLines: 2,
                                     style: GoogleFonts.nunito(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold)),
                                 SizedBox(
-                                  height: 20,
+                                  height: 15,
                                 ),
                                 Text(data["description"].toString() + "...",
                                     maxLines: 3,
