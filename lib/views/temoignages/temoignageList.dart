@@ -6,6 +6,10 @@ import 'package:card_loading/card_loading.dart';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
 import '../../config/baseUrl.dart';
+import  "package:get/get.dart";
+import "../temoignages/DetailTemoignage.dart";
+
+
 
 class VideoListPage extends StatefulWidget {
   @override
@@ -187,8 +191,7 @@ Container buildCardTemoignage(String title ,String description ,String coverPict
       ),
     margin: EdgeInsets.only(top: 10,bottom: 10),
     child: ListTile(
-      onTap: (){
-      },
+      onTap: () => Get.to(DetailTemoignage()),
       leading: Container(
         width: 100,
         height: double.infinity,

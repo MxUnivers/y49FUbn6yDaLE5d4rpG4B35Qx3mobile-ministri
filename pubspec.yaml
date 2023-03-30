@@ -49,6 +49,7 @@ dependencies:
   card_loading: ^0.3.0
   animated_card: ^2.0.0
   carousel_slider: ^4.0.0
+  flutter_html: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -117,3 +118,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
