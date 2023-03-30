@@ -1,17 +1,20 @@
 import "package:flutter/material.dart";
 import  "package:google_fonts/google_fonts.dart";
+import 'package:flutter_html/flutter_html.dart';
 
 class DetailTemoignage extends StatefulWidget {
   final String idTemoignage;
   final String title;
   final String coverPicture;
   final String content;
+
   const DetailTemoignage({Key? key ,
-    required idTemoignage,
-    required title,
-    required coverPicture,
-    required content, required this.idTemoignage, required this.title, required this.coverPicture, required this.content
+    required this.idTemoignage,
+    required this.title,
+    required this.coverPicture,
+    required this.content
   }) : super(key: key);
+
   @override
   State<DetailTemoignage> createState() => _DetailTemoignageState();
 }
@@ -238,23 +241,11 @@ class _DetailTemoignageState extends State<DetailTemoignage> {
               const SizedBox(
                 height: 20,
               ),
-              RichText(
-                text: TextSpan(
-                  children: [
-
-                    TextSpan(
-                      text:
-                      ' contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
-                      style: GoogleFonts.notoSerif(
-                        color: Colors.black,
-                        fontSize: 18,
-                        height: 1.7,
-                        wordSpacing: 2,
-                      ),
-                    ),
-                  ],
+              Container(
+                child: Html(
+                    data: widget.content.toString()
                 ),
-              ),
+              )
             ],
           ),
         ),
