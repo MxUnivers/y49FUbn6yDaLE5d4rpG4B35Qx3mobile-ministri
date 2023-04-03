@@ -43,7 +43,7 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
   # Ajouter la liste des evenements ok
   # Ajouter la liste des témmoignage enregistrés ok
   # Ajouter les programmes voire les programmes ok
-- Drawer page :
+- Drawer page : ok
   Profils:
    # 
   Marque page : 
