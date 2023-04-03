@@ -7,7 +7,7 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import '../../config/baseUrl.dart';
 import "package:get/get.dart";
-import "../temoignages/DetailTemoignage.dart";
+import 'DetailTemoignage.dart';
 
 class VideoListPage extends StatefulWidget {
   @override

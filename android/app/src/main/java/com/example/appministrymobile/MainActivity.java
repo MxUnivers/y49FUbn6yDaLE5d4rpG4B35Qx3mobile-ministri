@@ -1,4 +1,4 @@
-package com.example.torismo;
+package com.example.appministrymobile;
 
 import io.flutter.embedding.android.FlutterActivity;
 

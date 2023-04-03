@@ -1,12 +1,44 @@
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
+import 'dart:convert';
+import 'dart:ui';
+import 'package:torismo/views/bookmark/videobookmarklist.dart';
+import 'package:torismo/views/bookmark/eventbookmarklist.dart';
+
+var videosItems = {
+  'Vidéos',
+  '\30',
+  'assets/icons/bookmarks/video.png',
+}.toList();
+var temoignagesItems ={
+  'Témoignages',
+  '\10',
+  'assets/icons/bookmarks/examen.png'
+}.toList();
+var eventItems = {
+  'Evenements',
+  '\10',
+  'assets/icons/bookmarks/un-evenement.png'
+}.toList();
+var programmeItems = {
+  'Programmes',
+  '\10',
+  'assets/icons/bookmarks/calendrier.png'
+}.toList();
 
 class BookmarkPage extends StatelessWidget {
   const BookmarkPage({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
+
+
+
     return Scaffold(
         backgroundColor: Color(0xFFFCFAF8),
         body: ListView(children: <Widget>[
@@ -22,34 +54,11 @@ class BookmarkPage extends StatelessWidget {
                   mainAxisSpacing: 15.0,
                   childAspectRatio: 0.8,
                   children: <Widget>[
-                    _buildCard(
-                        'Vidéos',
-                        '\30',
-                        'assets/icons/bookmarks/video.png',
-                        false,
-                        false,
-                        context),
-                    _buildCard(
-                        'Témoignages',
-                        '\10',
-                        'assets/icons/bookmarks/examen.png',
-                        true,
-                        false,
-                        context),
-                    _buildCard(
-                        'Evenements',
-                        '\10',
-                        'assets/icons/bookmarks/un-evenement.png',
-                        false,
-                        true,
-                        context),
-                    _buildCard(
-                        'Programmes',
-                        '\10',
-                        'assets/icons/bookmarks/calendrier.png',
-                        false,
-                        false,
-                        context)
+                    // Videos
+                    _buildCard(videosItems[0].toString(),videosItems[1].toString(), videosItems[2].toString(), false, false, context),
+                    _buildCard(temoignagesItems[0].toString(),temoignagesItems[1].toString(), temoignagesItems[2].toString(), false, false, context),
+                    _buildCard(eventItems[0].toString(),eventItems[1].toString(), eventItems[2].toString(), false, false, context),
+                    _buildCard(programmeItems[0].toString(),programmeItems[1].toString(), programmeItems[2].toString(), false, false, context)
                   ])),
           SizedBox(height: 15.0)
         ]));
@@ -61,7 +70,18 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
   return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(
-          onTap: () {},
+          onTap: () {
+            if (name == videosItems[0]){
+              Get.to(VideoBookmarkPage());
+            }
+            if (name == temoignagesItems[0]){
+            }
+            if (name == eventItems[0]){
+              Get.to(EventBookmarkPage());
+            }
+            if (name == programmeItems[0]){
+            }
+          },
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
