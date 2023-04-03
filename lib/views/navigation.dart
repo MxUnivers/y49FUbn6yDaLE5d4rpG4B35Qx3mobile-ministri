@@ -5,7 +5,8 @@ import 'package:torismo/style/style.dart';
 import 'package:torismo/views/evennement/eventList.dart';
 import 'package:torismo/views/profile/profilePage.dart';
 import 'package:torismo/views/temoignages/temoignageList.dart';
-import 'package:torismo/views/bookmark/bookmarck.dart';
+  import 'package:torismo/views/bookmark/bookmarck.dart';
+  import 'package:torismo/component/DrawerLayout.dart';
 import 'home/home.dart';
 
 
@@ -51,7 +52,13 @@ class _NavigationPageState extends State<NavigationPage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0.0,
-            leading: Icon(Icons.menu_rounded ,  color : blackColor),
+            leading: IconButton(
+              onPressed: (){
+                Scaffold.of(context).openDrawer();
+              },
+                icon: Icon(Icons.menu_rounded) ,
+                color : blackColor
+            ),
             title: Text("app-mobile-ministry" ,  style: GoogleFonts.nunito(fontSize: 20,fontWeight: FontWeight.w700, color: Colors.blueGrey[700])),
             centerTitle: true,
             actions: [
@@ -94,6 +101,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
              */
           ),
+          drawer: MyDrawerLayout(),
           body: PageView(
             scrollDirection: Axis.vertical,
             reverse: true,
