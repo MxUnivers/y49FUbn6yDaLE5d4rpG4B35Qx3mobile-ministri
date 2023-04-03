@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:torismo/views/bookmark/programbookmarklist.dart';
 import 'package:torismo/views/bookmark/temoignagebookmarklist.dart';
 import 'dart:convert';
 import 'dart:ui';
@@ -82,6 +83,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
               Get.to(EventBookmarkPage());
             }
             if (name == programmeItems[0]){
+              Get.to( ProgramBookmarkPage());
             }
           },
           child: Container(

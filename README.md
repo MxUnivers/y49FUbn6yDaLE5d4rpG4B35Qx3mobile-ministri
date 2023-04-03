@@ -39,10 +39,10 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
 
 // 01-04-2023
 - Page Marque-page // bookmarks : 
-  # Ajouter la liste des vidéo
-  # Ajouter la liste des evenements
-  # Ajouter la liste des témmoignage enregistrés
-  # Ajouter les programmes voire les programmes 
+  # Ajouter la liste des vidéo ok
+  # Ajouter la liste des evenements ok
+  # Ajouter la liste des témmoignage enregistrés ok
+  # Ajouter les programmes voire les programmes ok
 - Drawer page :
   Profils:
    # 

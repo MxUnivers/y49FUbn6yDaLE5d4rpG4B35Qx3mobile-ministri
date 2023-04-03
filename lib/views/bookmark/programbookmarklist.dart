@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import "package:card_loading/card_loading.dart";
 import "package:google_fonts/google_fonts.dart";
 
-class TemoignageBookmarkPage extends StatefulWidget {
+class ProgramBookmarkPage extends StatefulWidget {
   @override
-  _TemoignageBookmarkPageState createState() => _TemoignageBookmarkPageState();
+  _ProgramBookmarkPageState createState() => _ProgramBookmarkPageState();
 }
 
-class _TemoignageBookmarkPageState extends State<TemoignageBookmarkPage> {
+class _ProgramBookmarkPageState extends State<ProgramBookmarkPage> {
   List<dynamic> _data = [];
   List<dynamic> _dataList = [];
 
@@ -25,7 +25,7 @@ class _TemoignageBookmarkPageState extends State<TemoignageBookmarkPage> {
 
   Future<void> _getDataFromApi() async {
     final response = await http.get(
-        Uri.parse(baseUrl['url'].toString() + "/api/v1/temoignages/get/all"));
+        Uri.parse(baseUrl['url'].toString() + "/api/v1/activites/programmes/get/all"));
     if (response.statusCode == 200 || response.statusCode == 300) {
       setState(() {
         Map<String, dynamic> _data = jsonDecode(response.body);
@@ -61,7 +61,7 @@ class _TemoignageBookmarkPageState extends State<TemoignageBookmarkPage> {
                   color: Colors.grey[200],
                   child: IconButton(
                     icon: Icon(
-                      Icons.group,
+                      Icons.padding_rounded,
                       size: 20,
                     ),
                     color: Colors.grey,
@@ -80,7 +80,7 @@ class _TemoignageBookmarkPageState extends State<TemoignageBookmarkPage> {
                     children: [
                       // Background Bookmrk video
                       BackgroundBookmarkVideo(
-                          "assets/images/temoignages/temoignagesbg.png"),
+                          "assets/images/programmes/illustration-people-dashboard.png"),
                       // Listes des vidéos reagarder
                       Column(children: [
                         _dataList.length > 0
@@ -201,7 +201,7 @@ Container BackgroundBookmarkVideo(String assetImage) {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Text(
-            "Temoignages enregistrès",
+            "Programmes de l'organisation",
             textAlign: TextAlign.center,
             style: GoogleFonts.nunito(
                 color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),

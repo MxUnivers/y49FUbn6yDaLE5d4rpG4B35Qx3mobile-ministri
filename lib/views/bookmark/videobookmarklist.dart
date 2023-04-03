@@ -117,7 +117,10 @@ class _VideoBookmarkPageState extends State<VideoBookmarkPage> {
 Container buildCard(
     String title, String description, String coverPicture, String videoLink) {
   return Container(
-    decoration: BoxDecoration(boxShadow: [
+
+    decoration: BoxDecoration(
+        color: Colors.grey[500],
+        boxShadow: [
       BoxShadow(
         blurRadius: 0.5,
         offset: Offset(0, 2),
@@ -132,6 +135,7 @@ Container buildCard(
             videoLink: videoLink.toString()));
       },
       leading: Container(
+
         width: 100,
         height: double.infinity,
         decoration: BoxDecoration(
