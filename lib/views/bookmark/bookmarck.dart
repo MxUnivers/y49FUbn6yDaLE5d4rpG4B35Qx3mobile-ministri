@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
+import 'package:torismo/views/bookmark/temoignagebookmarklist.dart';
 import 'dart:convert';
 import 'dart:ui';
 import 'package:torismo/views/bookmark/videobookmarklist.dart';
@@ -75,6 +76,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added,
               Get.to(VideoBookmarkPage());
             }
             if (name == temoignagesItems[0]){
+              Get.to(TemoignageBookmarkPage());
             }
             if (name == eventItems[0]){
               Get.to(EventBookmarkPage());

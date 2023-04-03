@@ -104,7 +104,10 @@ class _TemoignageBookmarkPageState extends State<TemoignageBookmarkPage> {
                       ]),
                     ],
                   ),
-                ))));
+                )
+            )
+        )
+    );
   }
 }
 /*
@@ -216,7 +219,7 @@ Container BackgroundBookmarkVideo(String assetImage) {
               decoration: InputDecoration(
                   border: InputBorder.none,
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
-                  hintText: "Search vidéos",
+                  hintText: "recherche temoignage...",
                   hintStyle: GoogleFonts.nunito(
                     color: Colors.grey,
                     fontSize: 13,
