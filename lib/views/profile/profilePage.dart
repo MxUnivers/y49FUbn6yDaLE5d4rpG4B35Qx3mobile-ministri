@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import "package:get/get.dart";
+import "./profileEditPage.dart";
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -39,7 +41,9 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(
                 width: 300,
                 child: ElevatedButton(
-                    onPressed: (){}
+                    onPressed: (){
+                      Get.to(ProfileEditPage());
+                    }
                     , child: Text(TextEddit.toString(), style: GoogleFonts.nunito(fontSize: 20,fontWeight: FontWeight.w700),),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueGrey,

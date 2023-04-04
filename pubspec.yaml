@@ -95,6 +95,8 @@ flutter:
     - assets/images/evenements/evenements.jpg
     - assets/images/temoignages/temoignagesbg.png
     - assets/images/programmes/illustration-people-dashboard.png
+    - assets/images/application_bg.jpg
+    - assets/images/profile_pic.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

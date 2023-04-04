@@ -43,25 +43,38 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
   # Ajouter la liste des evenements ok
   # Ajouter la liste des témmoignage enregistrés ok
   # Ajouter les programmes voire les programmes ok
-- Drawer page : ok
-  Profils:
-   # 
+- Drawer page : ok 
+     - image de fond pour le background 
+     - settings 
+     - profile 
+     - contact 
+     - a propos de nous 
+     - déconnexion 
+  Profils: 
+     - Formulaire de compte membre , ok
+   #
   Marque page : 
+     - Details des marks pages Programmes (programmes) ok
    #
   Notifications :
+- Afficher les notifications 
+- Details des nofications 
    #
   Parmètres :
+- changer la couleurdes pages 
    #
   Apros de nous :
+- presentation l'organisations 
    #
   contacter nous :
+- contacter l'organisation 
    #
   Termes d'utilisations :
+- utlisation du document pdf pour les condtions d'utilisation 
    #
 - Page de connexion : 
-  Login Page :
-  Signup Page :
-  Page de garde
-
-- Page de presentation de l'application mobile :
+  Login Page : page de connexion pour se connecter 
+  Signup Page : page d'inscription pour le nouvelle inscrit sur l'application 
+  Page de garde :  Présentation de l'application .
+  
   
