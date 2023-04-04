@@ -44,17 +44,17 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
   # Ajouter la liste des témmoignage enregistrés ok
   # Ajouter les programmes voire les programmes ok
 - Drawer page : ok 
-     - image de fond pour le background 
-     - settings 
-     - profile 
-     - contact 
-     - a propos de nous 
-     - déconnexion 
+     - image de fond pour le background ok
+     - settings ok
+     - profile ok
+     - contact ok
+     - a propos de nous ok
+     - déconnexion ok
   Profils: 
      - Formulaire de compte membre , ok
    #
   Marque page : 
-     - Details des marks pages Programmes (programmes) ok
+     - Details des marks pages Programmes (programmes) 
    #
   Notifications :
 - Afficher les notifications 
