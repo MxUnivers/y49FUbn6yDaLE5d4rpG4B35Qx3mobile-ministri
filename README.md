@@ -51,7 +51,7 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
      - a propos de nous ok
      - déconnexion ok
   Profils: 
-     - Formulaire de compte membre , ok
+     - Formulaire de compte membre , ok 
    #
   Marque page : 
      - Details des marks pages Programmes (programmes) 
@@ -60,8 +60,8 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
 - Afficher les notifications 
 - Details des nofications 
    #
-  Parmètres :
-- changer la couleurdes pages 
+  Paramètres :
+- changer la couleur des pages 
    #
   Apros de nous :
 - presentation l'organisations 

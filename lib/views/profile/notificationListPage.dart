@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:get/get.dart";
 
 class NotificationListPage extends StatefulWidget {
   const NotificationListPage({Key? key}) : super(key: key);
@@ -9,6 +10,23 @@ class NotificationListPage extends StatefulWidget {
 }
 
 class _StateNotificationListPage extends State<NotificationListPage> {
+
+  final List<dynamic> notifications = [
+    {"title":"Notification 1", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 2", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 3", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 4", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 5", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 6", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 7", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 8", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 9", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 10", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 11", "description":"description","datehour":"il ya 1heure"},
+    {"title":"Notification 12", "description":"description","datehour":"il ya 1heure"},
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,83 +45,51 @@ class _StateNotificationListPage extends State<NotificationListPage> {
           centerTitle: true,
         ),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Container(
-            child: ListView.separated(
-                itemBuilder: (context, index){
-                  return listViewItem(index);
+        body:
+        ListView.builder(
+          itemCount: notifications.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 0.2,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(5))
+              ),
+              child: ListTile(
+                focusColor: Colors.orange[500],
+                leading: Icon(Icons.notifications, color: Colors.amber,),
+                title: Text(notifications[index]["title"]),
+                onTap: () {
+                  // action to perform when notification is tapped
                 },
-              separatorBuilder: (context, index){
-                  return Divider(height:0);
-              },
-              itemCount: 15,
-            ),
-          ),
+                subtitle: Text(
+                    notifications[index]["description"]
+                ),
+                trailing: Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.grey.withOpacity(0.1)),
+                    child: IconButton(
+                      onPressed: (){
+                        Get.to(NotificationListPage());
+                      },
+                      iconSize: 20,
+                      icon: Icon(Icons.notifications, color: Colors.red,),
+                    )
+                ),
+              ),
+            );
+          },
         )
     );
   }
 
-  Widget listViewItem (int index ){
-    return Container(
-      margin: EdgeInsets.only(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          message(index),
-          timeAndDate(index)
-        ],
-      ),
-    );
-  }
 
-  Widget message(int index ){
-    double textSize = 14  ;
-    return Container(
-      child: RichText(
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
-        text: TextSpan(
-          text: "Message",
-          style: GoogleFonts.nunito(
-            color: Colors.black,
-            fontWeight: FontWeight.bold
-          ),
-          children: [
-            TextSpan(
-              text:"Message de Description",
-              style:GoogleFonts.nunito(
-                fontWeight: FontWeight.w400
-              )
-            ),
-
-          ]
-        ),
-      ),
-    );
-  }
-
-  Widget timeAndDate(int index){
-    return Container(
-      margin: EdgeInsets.only(top:5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "04-04-2023",
-            style:GoogleFonts.nunito(
-                fontSize:10
-            )
-          ),
-          Text(
-              "07:10 am",
-              style:GoogleFonts.nunito(
-                  fontSize:10
-              )
-          )
-        ],
-      ),
-    );
-  }
 
 
 }
