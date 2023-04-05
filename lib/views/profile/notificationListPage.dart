@@ -63,6 +63,7 @@ class _StateNotificationListPage extends State<NotificationListPage> {
                 leading: Icon(Icons.notifications, color: Colors.amber,),
                 title: Text(notifications[index]["title"]),
                 onTap: () {
+
                   // action to perform when notification is tapped
                     showDialog(
                       context: context,

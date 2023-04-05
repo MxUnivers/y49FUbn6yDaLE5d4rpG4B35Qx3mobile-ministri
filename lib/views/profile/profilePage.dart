@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import "package:get/get.dart";
 import "./profileEditPage.dart";
 import "./notificationListPage.dart";
+import  "../account/loginpage.dart";
+
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -118,6 +121,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               ListTile(
+                onTap: (){
+                  Get.to(LoginPage());
+                },
                 leading: Container(
                   width: 40,
                   height: 40,

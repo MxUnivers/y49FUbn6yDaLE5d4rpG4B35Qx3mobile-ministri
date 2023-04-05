@@ -96,6 +96,7 @@ flutter:
     - assets/images/temoignages/temoignagesbg.png
     - assets/images/programmes/illustration-people-dashboard.png
     - assets/images/application_bg.jpg
+    - assets/images/application.jpg
     - assets/images/profile_pic.jpg
   #   - images/a_dot_ham.jpeg
 

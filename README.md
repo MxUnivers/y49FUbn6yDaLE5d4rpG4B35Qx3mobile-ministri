@@ -57,14 +57,14 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
      - Details des marks pages Programmes (programmes) 
    #
   Notifications :
-- Afficher les notifications 
-- Details des nofications 
+- Afficher les notifications ok
+- Details des nofications ok
    #
   Paramètres :
 - changer la couleur des pages 
    #
-  Apros de nous :
-- presentation l'organisations 
+  A propos de nous :
+- présentation l'organisations 
    #
   contacter nous :
 - contacter l'organisation 
@@ -72,9 +72,10 @@ Ces pages sont une base solide pour une application de ce type, mais vous pouvez
   Termes d'utilisations :
 - utlisation du document pdf pour les condtions d'utilisation 
    #
+
+
 - Page de connexion : 
   Login Page : page de connexion pour se connecter 
   Signup Page : page d'inscription pour le nouvelle inscrit sur l'application 
   Page de garde :  Présentation de l'application .
-  
   
