@@ -64,6 +64,37 @@ class _StateNotificationListPage extends State<NotificationListPage> {
                 title: Text(notifications[index]["title"]),
                 onTap: () {
                   // action to perform when notification is tapped
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Bookmark '"+notifications[index]["title"]+"'"),
+                          content: Text(notifications[index]["description"], maxLines: 5,),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey[500]
+                              ),
+                              child: Text('Annuler'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green[900]
+                              ),
+                              child: Text('ajouter à votre bookmark'),
+                              onPressed: () {
+                                // Traitez l'action ici
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+
                 },
                 subtitle: Text(
                     notifications[index]["description"]
@@ -88,6 +119,7 @@ class _StateNotificationListPage extends State<NotificationListPage> {
         )
     );
   }
+
 
 
 
