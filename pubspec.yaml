@@ -96,10 +96,12 @@ flutter:
     - assets/images/temoignages/temoignagesbg.png
     - assets/images/programmes/illustration-people-dashboard.png
     - assets/images/application_bg.jpg
-    - assets/images/application.jpg
-    - assets/images/profile_pic.jpg
-  #   - images/a_dot_ham.jpeg
+    - assets/images/fete.png
+    - assets/images/informatif.png
+    - assets/images/conversation.png
+    - assets/images/poignee-de-main.png
 
+  #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
