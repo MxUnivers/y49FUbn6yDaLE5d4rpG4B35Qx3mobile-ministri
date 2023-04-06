@@ -50,6 +50,7 @@ dependencies:
   animated_card: ^2.0.0
   carousel_slider: ^4.0.0
   flutter_html: ^2.2.1
+  simple_animations: ^1.3.3
 
 dev_dependencies:
   flutter_test:
@@ -95,7 +96,7 @@ flutter:
     - assets/images/evenements/evenements.jpg
     - assets/images/temoignages/temoignagesbg.png
     - assets/images/programmes/illustration-people-dashboard.png
-    - assets/images/application_bg.jpg
+    - assets/images/application_bg.png
     - assets/images/fete.png
     - assets/images/informatif.png
     - assets/images/conversation.png
