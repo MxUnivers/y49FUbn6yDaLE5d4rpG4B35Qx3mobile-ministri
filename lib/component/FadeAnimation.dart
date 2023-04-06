@@ -1,22 +1,11 @@
 import  "package:flutter/material.dart";
 import  "package:simple_animations/simple_animations.dart";
 
-class FadeAnimation extends StatefulWidget {
-  final double delay;
-  final Widget child;
-  const FadeAnimation({Key? key,required this.delay, required this.child }) : super(key: key);
 
-  @override
-  State<FadeAnimation> createState() => _FadeAnimationState();
-}
-
-class _FadeAnimationState extends State<FadeAnimation>  {
-
-
-
-
-
-
+class FadeAnimationForm extends StatelessWidget  {
+  late final double delay;
+  late final Widget child;
+  FadeAnimationForm(this.delay,this.child);
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +15,15 @@ class _FadeAnimationState extends State<FadeAnimation>  {
 
     ]);
     return ControlledAnimation(
-      delay: Duration(milliseconds: (500 * widget.delay).round()),
+      delay: Duration(milliseconds: (500 * delay).round()),
       duration:tween.duration,
       tween: tween,
-      child: widget.child,
+      child: child,
       builderWithChild: (context, child,animation)=>Opacity(
           opacity: animation["opacity"],
         child: Transform.translate(
             offset: Offset(0,animation["translateY"]),
-          child: widget.child,
+          child: child,
         )
       )
     );
