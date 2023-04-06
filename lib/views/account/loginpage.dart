@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import  "package:get/get.dart";
+import "package:get/get.dart";
 import 'package:torismo/views/navigation.dart';
-import  "./signpage.dart";
-
+import "./signpage.dart";
+import "package:flutter_secure_storage/flutter_secure_storage.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,6 +14,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // Importation de la bibliothèque SharedPreferences
+
+  String emailOrUserName = '';
+  String passwordUser = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +29,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             height: 300,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.green,
-                  Colors.indigo
-                ]
-              ),
+              gradient: LinearGradient(colors: [Colors.green, Colors.indigo]),
               image: DecorationImage(
                   image: AssetImage("assets/images/application_bg.png"),
                   fit: BoxFit.fill),
@@ -71,8 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                         margin: EdgeInsets.only(top: 50),
                         child: Center(
-                            child: Text(
-                                'se connecter à     votre compte',
+                            child: Text('se connecter à     votre compte',
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.nunito(
                                     color: Colors.grey[100],
@@ -104,6 +104,11 @@ class _LoginPageState extends State<LoginPage> {
                             border:
                                 Border(bottom: BorderSide(color: Colors.grey))),
                         child: TextField(
+                          onChanged: (value) {
+                            setState(() {
+                              emailOrUserName = value;
+                            });
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Email or phone",
@@ -118,6 +123,11 @@ class _LoginPageState extends State<LoginPage> {
                             border:
                                 Border(bottom: BorderSide(color: Colors.grey))),
                         child: TextField(
+                          onChanged: (value) {
+                            setState(() {
+                              passwordUser = value;
+                            });
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "mot de passe",
@@ -141,8 +151,37 @@ class _LoginPageState extends State<LoginPage> {
                         Colors.green,
                       ])),
                   child: GestureDetector(
-                    onTap: (){
-                      Get.to(NavigationPage());
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Message s'affiche avec succès"),
+                            content: Text("description", maxLines: 5,),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.grey[500]
+                                ),
+                                child: Text('Annuler'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green[900]
+                                ),
+                                child: Text('ajouter à votre bookmark'),
+                                onPressed: () {
+                                  // Traitez l'action ici
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: Center(
                       child: Text(
@@ -150,34 +189,33 @@ class _LoginPageState extends State<LoginPage> {
                         style: GoogleFonts.nunito(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
-                  ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 70),
                 Container(
-                  padding: EdgeInsets.only(left: 50),
-                  child: Center(
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "mot de passe oublié ?",
-                          style: GoogleFonts.nunito(color: Colors.grey[600]),
-                        ),
-                        SizedBox(width: 5,),
-                        ElevatedButton(
-                            onPressed: (){
-                              Get.to(SignUpPage());
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey,
-                                foregroundColor: Colors.grey[900]
-                            ),
-                            child: Text("se connecter")
-                        )
-                      ],
-                    ),
-                  )
-                )
+                    padding: EdgeInsets.only(left: 40),
+                    child: Center(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            "mot de passe oublié ?",
+                            style: GoogleFonts.nunito(color: Colors.grey[600]),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                Get.to(SignUpPage());
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey,
+                                  foregroundColor: Colors.grey[900]),
+                              child: Text("s'inscrire"))
+                        ],
+                      ),
+                    ))
               ],
             ),
           )

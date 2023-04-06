@@ -183,7 +183,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ])),
                           child: Center(
                             child: Text(
-                              "Connexion",
+                              "s'inscrire",
                               style: GoogleFonts.nunito(
                                   color: Colors.white, fontWeight: FontWeight.bold),
                             ),
@@ -206,7 +206,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     backgroundColor: Colors.grey,
                                     foregroundColor: Colors.grey[900]
                                   ),
-                                  child: Text("s'inscrire")
+                                  child: Text("se connecter")
                               )
                             ],
                           ),

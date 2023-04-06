@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   void loadData() async {
     // Récupérer les données ici
-    await Future.delayed(Duration(seconds: 3)); // Simulation d'une requête asynchrone de 3 secondes
+    await Future.delayed(Duration(seconds: 5)); // Simulation d'une requête asynchrone de 3 secondes
     setState(() {
       _isLoading = false; // Changer l'état : page de chargement masquée
     });
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'mobile ministry',
+        title: 'application mobile minis',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
