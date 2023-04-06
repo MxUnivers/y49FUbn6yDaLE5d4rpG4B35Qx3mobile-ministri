@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+import  "package:get/get.dart";
+import  "./signpage.dart";
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -145,10 +148,30 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 70),
-                Text(
-                  "mot de passe oublié ?",
-                  style: GoogleFonts.nunito(color: Colors.grey[600]),
-                ),
+                Container(
+                  padding: EdgeInsets.only(left: 50),
+                  child: Center(
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "mot de passe oublié ?",
+                          style: GoogleFonts.nunito(color: Colors.grey[600]),
+                        ),
+                        SizedBox(width: 5,),
+                        ElevatedButton(
+                            onPressed: (){
+                              Get.to(SignUpPage());
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey,
+                                foregroundColor: Colors.grey[900]
+                            ),
+                            child: Text("se connecter")
+                        )
+                      ],
+                    ),
+                  )
+                )
               ],
             ),
           )
