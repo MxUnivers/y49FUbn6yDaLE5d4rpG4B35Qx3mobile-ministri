@@ -146,40 +146,57 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(colors: [
-                        Colors.blueGrey,
-                        Colors.green,
-                      ])),
+                      gradient: LinearGradient(
+                          colors: [
+                            Colors.blueGrey,
+                            Colors.green,
+                          ]
+                      )
+                  ),
                   child: GestureDetector(
                     onTap: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Message s'affiche avec succès"),
-                            content: Text("description", maxLines: 5,),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.grey[500]
-                                ),
-                                child: Text('Annuler'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green[900]
-                                ),
-                                child: Text('ajouter à votre bookmark'),
-                                onPressed: () {
-                                  // Traitez l'action ici
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
+                          return emailOrUserName == "" && passwordUser == ""
+                              ? AlertDialog(
+                                  title: Text("Alert Dialog"),
+                                  content: Text("This is an alert message."),
+                                  actions: [
+                                    ElevatedButton(
+                                      child: Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : AlertDialog(
+                                  title: Text("Authentification"),
+                                  content: Text(
+                                    "${emailOrUserName}   ${passwordUser}",
+                                    maxLines: 5
+                                  ),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.grey[500]),
+                                      child: Text('Annuler'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      },
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.green[900]),
+                                      child: Text('ajouter à votre bookmark'),
+                                      onPressed: () {
+                                        // Traitez l'action ici
+                                        Navigator.of(context).pop(true);
+                                      },
+                                    ),
+                                  ],
+                                );
                         },
                       );
                     },
