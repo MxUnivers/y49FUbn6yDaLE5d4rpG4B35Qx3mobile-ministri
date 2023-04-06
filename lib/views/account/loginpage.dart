@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import  "package:get/get.dart";
+import 'package:torismo/views/navigation.dart';
 import  "./signpage.dart";
 
 
@@ -20,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
         children: <Widget>[
           Container(
-            height: 400,
+            height: 300,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -139,12 +140,17 @@ class _LoginPageState extends State<LoginPage> {
                         Colors.blueGrey,
                         Colors.green,
                       ])),
-                  child: Center(
-                    child: Text(
-                      "Connexion",
-                      style: GoogleFonts.nunito(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(NavigationPage());
+                    },
+                    child: Center(
+                      child: Text(
+                        "Connexion",
+                        style: GoogleFonts.nunito(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                  ),
                   ),
                 ),
                 SizedBox(height: 70),
