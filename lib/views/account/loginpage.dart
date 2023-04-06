@@ -19,12 +19,19 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             height: 400,
             decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.green,
+                  Colors.indigo
+                ]
+              ),
               image: DecorationImage(
                   image: AssetImage("assets/images/application_bg.png"),
                   fit: BoxFit.fill),
             ),
             child: Stack(
               children: <Widget>[
+                /*
                 Positioned(
                     left: 30,
                     width: 80,
@@ -54,13 +61,17 @@ class _LoginPageState extends State<LoginPage> {
                               image:
                                   AssetImage("assets/images/informatif.png"))),
                     )),
+
+                 */
                 Positioned(
                     child: Container(
                         margin: EdgeInsets.only(top: 50),
                         child: Center(
-                            child: Text("connexion",
+                            child: Text(
+                                'se connecter à     votre compte',
+                                textAlign: TextAlign.center,
                                 style: GoogleFonts.nunito(
-                                    color: Colors.grey[900],
+                                    color: Colors.grey[100],
                                     fontSize: 40,
                                     fontWeight: FontWeight.bold)))))
               ],
@@ -122,8 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       gradient: LinearGradient(colors: [
-                        Color.fromRGBO(143, 148, 251, 1),
-                        Color.fromRGBO(143, 148, 251, .6),
+                        Colors.blueGrey,
+                        Colors.green,
                       ])),
                   child: Center(
                     child: Text(
